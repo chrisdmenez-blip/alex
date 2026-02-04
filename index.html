@@ -36,7 +36,6 @@
       min-height: 70px;
       margin-bottom: 20px;
       color: #444;
-      transition: opacity 0.4s ease;
     }
 
     button {
@@ -45,7 +44,7 @@
       border-radius: 30px;
       font-size: 16px;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      margin: 5px;
     }
 
     .main-btn {
@@ -53,33 +52,27 @@
       color: white;
     }
 
-    .buttons {
-      display: none;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
-    }
-
     .yes {
       background: #ff4d6d;
       color: white;
+      font-size: 18px;
     }
 
     .no {
       background: #ccc;
       color: #333;
+      font-size: 14px;
     }
 
     .canva-btn {
-      margin-top: 20px;
       background: #7b2cbf;
       color: white;
-      font-size: 17px;
-      box-shadow: 0 4px 10px rgba(0,0,0,.2);
+      margin-top: 20px;
     }
 
-    .canva-btn:hover {
-      transform: scale(1.05);
+    #questionButtons,
+    #canvaLink {
+      display: none;
     }
   </style>
 </head>
@@ -91,21 +84,19 @@
 
     <div id="message">Toca el botón…</div>
 
-    <button id="nextBtn" class="main-btn" onclick="nextMessage()">Tócame</button>
+    <button id="nextBtn" class="main-btn">Tócame</button>
 
-    <div class="buttons" id="questionButtons">
-      <button class="yes" id="yesBtn" onclick="sayYes()">Sí 💖</button>
-      <button class="no" id="noBtn" onclick="sayNo()">No 😢</button>
+    <div id="questionButtons">
+      <button class="yes" id="yesBtn">Sí 💖</button>
+      <button class="no" id="noBtn">No 😢</button>
     </div>
 
-    <!-- BOTÓN CANVA (APARECE AL FINAL) -->
-    <a id="canvaLink" href="https://www.canva.com/design/DAHAYLxBQTg/wR__iG0olwjr4_TqJS7oKQ/view?utm_content=DAHAYLxBQTg&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hfbdbb461ef" target="_blank" style="display:none;">
+    <!-- LINK A CANVA -->
+    <a id="canvaLink" href="https://www.canva.com/design/DAHAYLxBQTg/wR__iG0olwjr4_TqJS7oKQ/view?utm_content=DAHAYLxBQTg&utm_campaign=designshare&utm_medium=link&utm_source=viewer" target="_blank">
       <button class="canva-btn">💌 Ábrelo con amor</button>
     </a>
-
   </div>
 
-  <!-- Música -->
   <audio id="music" loop>
     <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_5e3b8f0d5b.mp3" type="audio/mpeg">
   </audio>
@@ -123,51 +114,45 @@
     let index = 0;
     let musicStarted = false;
 
-    function nextMessage() {
-      const msg = document.getElementById("message");
-      const btn = document.getElementById("nextBtn");
-      const music = document.getElementById("music");
+    const messageBox = document.getElementById("message");
+    const nextBtn = document.getElementById("nextBtn");
+    const questionBtns = document.getElementById("questionButtons");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const canvaLink = document.getElementById("canvaLink");
+    const music = document.getElementById("music");
 
+    nextBtn.onclick = () => {
       if (!musicStarted) {
         music.play();
         musicStarted = true;
       }
 
-      msg.style.opacity = 0;
+      if (index < messages.length) {
+        messageBox.innerText = messages[index];
+        index++;
+      } else {
+        messageBox.innerText = "¿Quieres ser mi San Valentín? ❤️";
+        nextBtn.style.display = "none";
+        questionBtns.style.display = "block";
+      }
+    };
 
-      setTimeout(() => {
-        if (index < messages.length) {
-          msg.innerText = messages[index];
-          msg.style.opacity = 1;
-          index++;
-        } else {
-          msg.innerText = "¿Quieres ser mi San Valentín? ❤️";
-          msg.style.opacity = 1;
-          btn.style.display = "none";
-          document.getElementById("questionButtons").style.display = "flex";
-        }
-      }, 300);
-    }
+    noBtn.onclick = () => {
+      noBtn.style.fontSize = "10px";
+      yesBtn.style.fontSize = "26px";
+    };
 
-    function sayNo() {
-      const noBtn = document.getElementById("noBtn");
-      const yesBtn = document.getElementById("yesBtn");
-
-      noBtn.style.transform = "scale(0.6)";
-      yesBtn.style.transform = "scale(1.4)";
-    }
-
-    function sayYes() {
-      document.getElementById("questionButtons").style.display = "none";
-      document.getElementById("message").innerText =
-        "Sabía que dirías que sí… te quiero mucho ❤️";
-
-      document.getElementById("canvaLink").style.display = "block";
-    }
+    yesBtn.onclick = () => {
+      questionBtns.style.display = "none";
+      messageBox.innerText = "Sabía que dirías que sí… te quiero mucho ❤️";
+      canvaLink.style.display = "block";
+    };
   </script>
 
 </body>
 </html>
+
 
 
 
