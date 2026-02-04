@@ -68,10 +68,10 @@
       background: #7b2cbf;
       color: white;
       margin-top: 20px;
+      display: none;
     }
 
-    #questionButtons,
-    #canvaLink {
+    #questionButtons {
       display: none;
     }
   </style>
@@ -91,9 +91,14 @@
       <button class="no" id="noBtn">No 😢</button>
     </div>
 
-    <!-- LINK A CANVA -->
-    <a id="canvaLink" href="https://www.canva.com/design/DAHAYLxBQTg/wR__iG0olwjr4_TqJS7oKQ/view?utm_content=DAHAYLxBQTg&utm_campaign=designshare&utm_medium=link&utm_source=viewer" target="_blank">
-      <button class="canva-btn">💌 Ábrelo con amor</button>
+    <!-- BOTÓN CANVA -->
+    <a 
+      href="https://acortar.link/aTdpq1"
+      target="_blank"
+    >
+      <button class="canva-btn" id="canvaBtn">
+        💌 Ábrelo con amor
+      </button>
     </a>
   </div>
 
@@ -103,12 +108,12 @@
 
   <script>
     const messages = [
-      "No eres una casualidad.",
-      "Me gustas incluso todo el tiempo ❤️",
-      "Contigo, todo se siente más tranquilo.",
-      "Eres mi lugar seguro :).",
-      "Si el mundo se pone difícil, te elijo igual.",
-      "No prometo perfección, pero sí quedarme e intentarlo."
+      "No eres una casualidad ❤️",
+      "Me gustas incluso todo el tiempo 💕",
+      "Contigo, todo se siente más tranquilo",
+      "Eres mi lugar seguro",
+      "Si el mundo se pone difícil, te elijo igual",
+      "No prometo perfección, pero sí quedarme"
     ];
 
     let index = 0;
@@ -119,7 +124,7 @@
     const questionBtns = document.getElementById("questionButtons");
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
-    const canvaLink = document.getElementById("canvaLink");
+    const canvaBtn = document.getElementById("canvaBtn");
     const music = document.getElementById("music");
 
     nextBtn.onclick = () => {
@@ -146,7 +151,7 @@
     yesBtn.onclick = () => {
       questionBtns.style.display = "none";
       messageBox.innerText = "Sabía que dirías que sí… te quiero mucho ❤️";
-      canvaLink.style.display = "block";
+      canvaBtn.style.display = "inline-block";
     };
   </script>
 
