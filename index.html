@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Para ti 🤍</title>
+  <title>Para ti ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       margin: 0;
@@ -11,7 +13,7 @@
       justify-content: center;
       align-items: center;
       background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       text-align: center;
     }
 
@@ -20,7 +22,7 @@
       padding: 30px;
       border-radius: 20px;
       width: 90%;
-      max-width: 400px;
+      max-width: 420px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     }
 
@@ -31,57 +33,125 @@
 
     #message {
       font-size: 18px;
-      min-height: 60px;
+      min-height: 70px;
       margin-bottom: 20px;
       color: #444;
-      transition: 0.3s;
+      transition: opacity 0.4s ease;
+    }
+
+    .buttons {
+      display: none;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
     }
 
     button {
-      background: #ee9ca7;
       border: none;
       padding: 12px 25px;
       border-radius: 30px;
-      color: white;
       font-size: 16px;
       cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
-    button:hover {
-      background: #e07a8c;
+    .yes {
+      background: #ee9ca7;
+      color: white;
+    }
+
+    .no {
+      background: #ccc;
+      color: #333;
+    }
+
+    #finalImage {
+      display: none;
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 20px;
     }
   </style>
 </head>
+
 <body>
 
   <div class="card">
-    <h1>Esto es para ti 🤍</h1>
+    <h1>Esto es para ti ❤️</h1>
     <div id="message">Toca el botón…</div>
-    <button onclick="nextMessage()">Tócame</button>
+
+    <button id="nextBtn" onclick="nextMessage()">Tócame</button>
+
+    <div class="buttons" id="questionButtons">
+      <button class="yes" id="yesBtn" onclick="sayYes()">Sí 💖</button>
+      <button class="no" id="noBtn" onclick="sayNo()">No 😢</button>
+    </div>
+
+    <img id="finalImage" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Te quiero ❤️">
   </div>
+
+  <audio id="music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_5e3b8f0d5b.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     const messages = [
       "No eres una casualidad.",
-      "Me gustas incluso en tus días raros.",
+      "Me gustas incluso todo el tiempo ❤️",
       "Contigo, todo se siente más tranquilo.",
-      "Eres mi lugar seguro.",
+      "Eres mi lugar seguro :).",
       "Si el mundo se pone difícil, te elijo igual.",
-      "No prometo perfección, pero sí quedarme.",
-      "Esto lo hice pensando solo en ti 🤍"
+      "No prometo perfección, pero sí quedarme e intentarlo."
     ];
 
     let index = 0;
+    let musicStarted = false;
 
     function nextMessage() {
-      document.getElementById("message").innerText = messages[index];
-      index++;
+      const msg = document.getElementById("message");
+      const btn = document.getElementById("nextBtn");
+      const music = document.getElementById("music");
 
-      if (index >= messages.length) {
-        index = 0;
+      if (!musicStarted) {
+        music.play();
+        musicStarted = true;
       }
+
+      msg.style.opacity = 0;
+
+      setTimeout(() => {
+        if (index < messages.length) {
+          msg.innerText = messages[index];
+          msg.style.opacity = 1;
+          index++;
+        } else {
+          msg.innerText = "¿Quieres ser mi San Valentín? ❤️";
+          msg.style.opacity = 1;
+          btn.style.display = "none";
+          document.getElementById("questionButtons").style.display = "flex";
+        }
+      }, 300);
+    }
+
+    function sayNo() {
+      const noBtn = document.getElementById("noBtn");
+      const yesBtn = document.getElementById("yesBtn");
+
+      noBtn.style.transform = "scale(0.7)";
+      yesBtn.style.transform = "scale(1.2)";
+    }
+
+    function sayYes() {
+      document.getElementById("questionButtons").style.display = "none";
+      document.getElementById("message").innerText =
+        "Sabía que dirías que sí… te quiero mucho ❤️";
+      document.getElementById("finalImage").style.display = "block";
     }
   </script>
 
 </body>
 </html>
+
+
+
+
