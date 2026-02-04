@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para ti 🤍</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    #message {
+      font-size: 18px;
+      min-height: 60px;
+      margin-bottom: 20px;
+      color: #444;
+      transition: 0.3s;
+    }
+
+    button {
+      background: #ee9ca7;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e07a8c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Esto es para ti 🤍</h1>
+    <div id="message">Toca el botón…</div>
+    <button onclick="nextMessage()">Tócame</button>
+  </div>
+
+  <script>
+    const messages = [
+      "No eres una casualidad.",
+      "Me gustas incluso en tus días raros.",
+      "Contigo, todo se siente más tranquilo.",
+      "Eres mi lugar seguro.",
+      "Si el mundo se pone difícil, te elijo igual.",
+      "No prometo perfección, pero sí quedarme.",
+      "Esto lo hice pensando solo en ti 🤍"
+    ];
+
+    let index = 0;
+
+    function nextMessage() {
+      document.getElementById("message").innerText = messages[index];
+      index++;
+
+      if (index >= messages.length) {
+        index = 0;
+      }
+    }
+  </script>
+
+</body>
+</html>
